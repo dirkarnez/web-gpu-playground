@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+<canvas></canvas>
+<script>
+(() => {
+    if (!navigator.gpu) {
+        return;
+    }
+
+    navigator.gpu.requestAdapter()
+    .then(adapter => adapter.requestDevice())
+    .then(device => {
+        const canvas = document.querySelector('canvas');
+        const context = canvas.getContext('webgpu'); //GPUCanvasContext
+        const canvasFormat = navigator.gpu.getPreferredCanvasFormat()
+        context.configure({
+            device: device,
+            format: canvasFormat,
+        });
+
+        // load fetch .wgsl and do math
+    });
+})();
+</script>
+
+</body>
+</html>
+
+
+
